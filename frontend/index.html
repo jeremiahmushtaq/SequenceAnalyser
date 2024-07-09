@@ -10,34 +10,34 @@
 <body>
     <div class="container">
         <header>
-            <h1>Web Analysis Tool</h1>
+            <h1>SequenceAnalyser</h1>
             <p>Select the type of analysis you want to perform:</p>
         </header>
         <main>
             <div class="card">
                 <h2>Calculate Primer Melting Temperature</h2>
-                <p>Analyze and calculate the melting temperature of your primers efficiently.</p>
-                <form>
+                <p>Analyse and calculate the melting temperature of your primers efficiently.</p>
+                <form id="primer-form">
                     <input type="file" id="primer-upload" name="primer-upload" hidden>
-                    <button type="button" onclick="uploadFile('primer-upload')">Upload</button>
+                    <button type="button" onclick="uploadFiles('primer-upload', 'primer-form')">Upload</button>
                     <span id="primer-tick" class="tick-mark">&#10003;</span>
                 </form>
             </div>
             <div class="card">
-                <h2>Amino Acid Clustering</h2>
-                <p>Group amino acids based on their properties and similarities.</p>
-                <form>
-                    <input type="file" id="amino-upload" name="amino-upload" hidden>
-                    <button type="button" onclick="uploadFile('amino-upload')">Upload</button>
+                <h2>Protein Clustering</h2>
+                <p>Group proteins based on their amino acid usage pattern.</p>
+                <form id="amino-form">
+                    <input type="file" id="amino-upload" name="amino-upload" multiple hidden>
+                    <button type="button" onclick="uploadFiles('amino-upload', 'amino-form')">Upload</button>
                     <span id="amino-tick" class="tick-mark">&#10003;</span>
                 </form>
             </div>
             <div class="card">
                 <h2>Finding Longest ORF</h2>
                 <p>Identify the longest open reading frame in your DNA sequence.</p>
-                <form>
+                <form id="orf-form">
                     <input type="file" id="orf-upload" name="orf-upload" hidden>
-                    <button type="button" onclick="uploadFile('orf-upload')">Upload</button>
+                    <button type="button" onclick="uploadFiles('orf-upload', 'orf-form')">Upload</button>
                     <span id="orf-tick" class="tick-mark">&#10003;</span>
                 </form>
             </div>
@@ -46,6 +46,7 @@
             <p>&copy; 2024 Web Analysis Tool. All rights reserved.</p>
         </footer>
     </div>
-    <script src="script.js"></script>
+    <script src = script.js>
+    </script>
 </body>
 </html>
