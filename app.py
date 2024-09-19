@@ -15,7 +15,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/upload', methods=['POST'])
-def handle_file_upload():
+def Calculate_Prime_Melting_Temperature():
     """
     Handle the file upload, ensure the file is valid, process it,
     render the results, and delete the file afterward.
@@ -30,7 +30,8 @@ def handle_file_upload():
         # Check if the file exists and has an allowed extension
         if file:
             if extension not in app.config['ALLOWED_EXTENSIONS']:
-                return 'File is not a TXT or FASTA file.'  # Return error for invalid file types
+                # Return error for invalid file types
+                return 'File is not a TXT or FASTA file.'  
 
             # Securely save the file to the designated uploads directory
             file_path = os.path.join(
@@ -48,20 +49,20 @@ def handle_file_upload():
                 return f"{str(e)}"
 
             # Render the results in the results.html template
-            response = render_template('results.html', result=result)
+            return render_template('results.html', result=result)
 
-            # Delete the uploaded file after processing to free up space
+    except RequestEntityTooLarge:
+        # Handle file size errors
+        return 'File is larger than 16MB limit.'
+    
+    finally:
+        # Ensure that the file is deleted, whether or not an exception occurred
+        if file_path and os.path.exists(file_path):
             try:
                 os.remove(file_path)
                 print(f"Deleted file: {file_path}")  # Log the file deletion
             except OSError as e:
                 print(f"Error deleting file {file_path}: {e}")  # Log any errors in file deletion
-
-            return response  # Return the response to the client
-
-    except RequestEntityTooLarge:
-        # Handle file size errors
-        return 'File is larger than 16MB limit.'
 
     # Redirect to the home page if no file is uploaded
     return redirect("/")
