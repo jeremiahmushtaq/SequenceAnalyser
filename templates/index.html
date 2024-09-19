@@ -6,7 +6,12 @@
 </head>
 <body>
     <h1>Calculating Primer Melting Temperature</h1>
-    <form action = "/upload" method = "post" enctype="multipart/form-data">   
+    <form action = "/upload/primer" method = "post" enctype="multipart/form-data">   
+        <input type="file" name="file" />   
+        <input type = "submit" value="Upload">
+    </form> 
+    <h1>Find Longest Open Reading Frame</h1>
+    <form action = "/upload/orf" method = "post" enctype="multipart/form-data">   
         <input type="file" name="file" />   
         <input type = "submit" value="Upload">
     </form> 
