@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 from functions.primers_and_melting_temperature import sequencePCRtemp, BadSequenceException
 from functions.translation_and_reading_frames import maximalORFa, OpenReadingFrameException
+from functions.pairwise_distance_matrix import DistanceMatrix, DimensionalityException
 from werkzeug.exceptions import RequestEntityTooLarge
 
 app = Flask(__name__)
@@ -121,6 +122,70 @@ def Longest_Open_Reading_Frame():
                 print(f"Deleted file: {file_path}")  # Log the file deletion
             except OSError as e:
                 print(f"Error deleting file {file_path}: {e}")  # Log any errors in file deletion
+
+    # Redirect to the home page if no file is uploaded
+    return redirect("/")
+
+@app.route('/upload/pdm', methods=['POST'])
+def Pairwise_Distance_Matrix():
+    """
+    Handle the file upload, ensure the file is valid, process it,
+    render the results, and delete the files afterward.
+    """
+    file_paths = []  # List to store paths of saved files
+
+    try:
+        # Retrieve the uploaded files from the form
+        files = request.files.getlist('file')
+
+        if not files:
+            return 'No files uploaded.'
+
+        for file in files:
+            # Extract the file extension to validate the file type
+            extension = os.path.splitext(file.filename)[1]
+
+            # Check if the file exists and has an allowed extension
+            if file:
+                if extension not in app.config['ALLOWED_EXTENSIONS']:
+                    # Return error for invalid file types
+                    return 'One of the files is not a valid TXT or FASTA file.'  
+
+                # Securely save the file to the designated uploads directory
+                file_path = os.path.join(
+                    app.config['UPLOAD_DIRECTORY'],
+                    secure_filename(file.filename)
+                )
+                file.save(file_path)
+                file_paths.append(file_path)  # Append saved file path to the list
+
+        # List the saved files (full paths) to pass to the DistanceMatrix function
+        user_files = file_paths
+
+        try:
+            # Process the uploaded files using the custom DistanceMatrix function
+            result = DistanceMatrix(user_files)
+
+        except DimensionalityException as e:
+            # Handle the specific exception raised by your function
+            return f"Error: {str(e)}"
+
+        # Render the results in the results_pdm.html template
+        return render_template('results_pdm.html', result=result)
+
+    except RequestEntityTooLarge:
+        # Handle file size errors
+        return 'One or more files are larger than the 16MB limit.'
+
+    finally:
+        # Ensure that the uploaded files are deleted after processing
+        for file_path in file_paths:
+            if os.path.exists(file_path):
+                try:
+                    os.remove(file_path)
+                    print(f"Deleted file: {file_path}")
+                except OSError as e:
+                    print(f"Error deleting file {file_path}: {e}")
 
     # Redirect to the home page if no file is uploaded
     return redirect("/")
