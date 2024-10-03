@@ -1,24 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Homepage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SequenceAnalyser - Homepage</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Calculating Primer Melting Temperature</h1>
-    <form action = "/upload/primer" method = "post" enctype="multipart/form-data">   
-        <input type="file" name="file" />   
-        <input type = "submit" value="Upload">
-    </form> 
-    <h1>Find Longest Open Reading Frame</h1>
-    <form action = "/upload/orf" method = "post" enctype="multipart/form-data">   
-        <input type="file" name="file" />   
-        <input type = "submit" value="Upload">
-    </form>
-    <h1>Protein Clustering</h1>
-    <form action = "/upload/pdm" method = "post" enctype="multipart/form-data">   
-        <input type="file" name="file" multiple />   
-        <input type = "submit" value="Upload">
-    </form> 
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header text-center mb-5">
+            <h1>SequenceAnalyser</h1>
+            <p class="lead">A Modern Tool for Genetic Sequence Analysis</p>
+        </div>
+
+        <!-- Calculating Primer Melting Temperature Section -->
+        <div class="card feature-card">
+            <div class="card-body">
+                <h2 class="card-title">Calculate Primer Melting Temperature</h2>
+                <p>Upload your file to calculate the melting temperature of primers.</p>
+                <form action="/upload/primer" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" class="form-control mb-3">
+                    <button type="submit" class="btn btn-upload">Upload and Calculate</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Finding Longest Open Reading Frame Section -->
+        <div class="card feature-card">
+            <div class="card-body">
+                <h2 class="card-title">Find Longest Open Reading Frame</h2>
+                <p>Upload your file to find the longest open reading frame.</p>
+                <form action="/upload/orf" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" class="form-control mb-3">
+                    <button type="submit" class="btn btn-upload">Upload and Analyse</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Protein Clustering Section -->
+        <div class="card feature-card">
+            <div class="card-body">
+                <h2 class="card-title">Protein Clustering</h2>
+                <p>Upload multiple files for protein clustering based on amino acid properties.</p>
+                <form action="/upload/pdm" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" class="form-control mb-3" multiple>
+                    <button type="submit" class="btn btn-upload">Upload and Cluster</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

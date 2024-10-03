@@ -7,6 +7,7 @@ from functions.pairwise_distance_matrix import DistanceMatrix, DimensionalityExc
 from werkzeug.exceptions import RequestEntityTooLarge
 
 app = Flask(__name__)
+
 app.config['UPLOAD_DIRECTORY'] = 'uploads'  # Directory to store uploaded files
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Maximum file size limit set to 16 MB
 app.config['ALLOWED_EXTENSIONS'] = ['.txt', '.fasta', '.fas', '.fa', '.fna', '.ffn', '.faa', '.mpfa', '.frn']  # Allowed file extensions
@@ -191,4 +192,4 @@ def Pairwise_Distance_Matrix():
     return redirect("/")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
