@@ -1,4 +1,4 @@
-# SequenceAnalyser
+# SequenceAnalyser 🧬
 
 SequenceAnalyser is a bioinformatics tool designed to help researchers analyse DNA and amino acid sequences. This web application provides three main services:
 
