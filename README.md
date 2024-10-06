@@ -1,6 +1,6 @@
-# SequenceAnalyser
+# SequenceAnalyser 🧬
 
-SequenceAnalyser is a bioinformatics tool designed to help researchers analyze DNA and amino acid sequences. This web application provides three main services:
+SequenceAnalyser is a bioinformatics tool designed to help researchers analyse DNA and amino acid sequences. This web application provides three main services:
 
 1. **Primer Melting Temperature Calculation**: Takes a DNA sequence in FASTA format and computes the forward and reverse primers. It then uses the Wallace-Ikatura equation to calculate the melting temperatures of both primers and provides an average melting temperature.
 2. **Longest Open Reading Frame Determination**: Accepts a DNA sequence in FASTA format, translates it into amino acids, and identifies the longest open reading frame (ORF), starting with a methionine and ending with a stop codon.
@@ -9,7 +9,7 @@ SequenceAnalyser is a bioinformatics tool designed to help researchers analyze D
 ## How to Use SequenceAnalyser
 
 Launch the application:  
-[SequenceAnalyser App](https://sequenceanalyser-449372077532.europe-west2.run.app/)
+[SequenceAnalyser](https://sequenceanalyser-449372077532.europe-west2.run.app/)
 
 ### Primer Melting Temperature
 1. Upload a FASTA file containing a DNA sequence using "Choose file".
@@ -58,4 +58,4 @@ We are continuously working to improve SequenceAnalyser. In future updates, we a
 7. **Flexible Start Codon Detection**: Include an option to detect alternative start codons besides methionine (or N-formylmethionine) for users working with diverse organisms. This would make the tool applicable to a broader range of biological systems.
 
 ## Contact & Support
-For any issues, suggestions, or feedback, please contact or raise an issue on [GitHub repository](https://github.com/jeremiahmushtaq/SequenceAnalyser/issues).
+For any issues, suggestions, or feedback, please contact or raise an issue on [Issues](https://github.com/jeremiahmushtaq/SequenceAnalyser/issues).
